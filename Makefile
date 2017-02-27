@@ -23,3 +23,14 @@ blinky.elf: blinky.o tassimo.o dumper.ld
 blinky.hex: blinky.elf
 	arm-none-eabi-objcopy -O ihex blinky.elf blinky.hex
 
+
+
+plltest.o: plltest.c
+	arm-none-eabi-gcc -ffreestanding -nostdlib -nostartfiles -c plltest.c
+
+plltest.elf: plltest.o tassimo.o dumper.ld
+	arm-none-eabi-ld -o plltest.elf -T dumper.ld plltest.o tassimo.o -Map plltest.map
+
+plltest.hex: plltest.elf
+	arm-none-eabi-objcopy -O ihex plltest.elf plltest.hex
+

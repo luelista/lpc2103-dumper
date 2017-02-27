@@ -4,7 +4,7 @@
 void blinky(int pos);
 char readbuf[100];
 int bufpos;
-void _start(void) {
+MAINFUNCTION void _start(void)  {
 	int ctr,bit,pos,reg;
 	char inchar;
 	char* pars;
@@ -64,10 +64,10 @@ void _start(void) {
 					IO0DIR |= bit;
 					break;
 				case 's':
-					IO0SET |= bit;
+					IO0SET = bit;
 					break;
 				case 'c':
-					IO0CLR |= bit;
+					IO0CLR = bit;
 					break;
 				case 'b':
 					blinky(pos);
@@ -95,9 +95,9 @@ void blinky(int pos) {
 	while(r-- > 0) {
 		IO0DIR |= bit;
 		ctr=0x20000; while(ctr-- > 0);
-		IO0SET |= bit;
+		IO0SET = bit;
 		ctr=0x20000; while(ctr-- > 0);
-		IO0CLR |= bit;
+		IO0CLR = bit;
 		ctr=0x20000; while(ctr-- > 0);
 		IO0DIR &= ~bit;
 		ctr=0x20000; while(ctr-- > 0);

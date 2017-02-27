@@ -11,6 +11,7 @@ MEMORY {
 SECTIONS {
 	. = 0x40000800;
 	.text : {
+		* (.text.startcode);
 		* (.text);
 	}>RAM
 	.data : {
