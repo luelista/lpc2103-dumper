@@ -1,0 +1,77 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+readbuf             0x64              blinky.o
+cksum               0x4               tassimo.o
+bufpos              0x4               blinky.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x0000000040000800 0x0000000000000800 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000040000800                . = 0x40000800
+
+.text           0x0000000040000800      0x698
+ *(.text)
+ .text          0x0000000040000800      0x3b8 blinky.o
+                0x0000000040000800                _start
+                0x0000000040000a38                blinky
+ .text          0x0000000040000bb8      0x2e0 tassimo.o
+                0x0000000040000bb8                puthex
+                0x0000000040000c84                putchar
+                0x0000000040000cd4                htoi
+
+.glue_7         0x0000000040000e98        0x0
+ .glue_7        0x0000000040000e98        0x0 linker stubs
+
+.glue_7t        0x0000000040000e98        0x0
+ .glue_7t       0x0000000040000e98        0x0 linker stubs
+
+.vfp11_veneer   0x0000000040000e98        0x0
+ .vfp11_veneer  0x0000000040000e98        0x0 linker stubs
+
+.v4_bx          0x0000000040000e98        0x0
+ .v4_bx         0x0000000040000e98        0x0 linker stubs
+
+.iplt           0x0000000040000e98        0x0
+ .iplt          0x0000000040000e98        0x0 blinky.o
+
+.rel.dyn        0x0000000040000e98        0x0
+ .rel.iplt      0x0000000040000e98        0x0 blinky.o
+
+.data           0x0000000040000e98        0x0
+ *(.data)
+ .data          0x0000000040000e98        0x0 blinky.o
+ .data          0x0000000040000e98        0x0 tassimo.o
+LOAD blinky.o
+LOAD tassimo.o
+OUTPUT(blinky.elf elf32-littlearm)
+
+.igot.plt       0x0000000040000e98        0x0
+ .igot.plt      0x0000000040000e98        0x0 blinky.o
+
+.bss            0x0000000040000e98       0x6c
+ .bss           0x0000000040000e98        0x0 blinky.o
+ COMMON         0x0000000040000e98       0x68 blinky.o
+                0x0000000040000e98                readbuf
+                0x0000000040000efc                bufpos
+ .bss           0x0000000040000f00        0x0 tassimo.o
+ COMMON         0x0000000040000f00        0x4 tassimo.o
+                0x0000000040000f00                cksum
+
+.comment        0x0000000000000000       0x1d
+ .comment       0x0000000000000000       0x1d blinky.o
+                                         0x1e (size before relaxing)
+ .comment       0x000000000000001d       0x1e tassimo.o
+
+.ARM.attributes
+                0x0000000000000000       0x30
+ .ARM.attributes
+                0x0000000000000000       0x30 blinky.o
+ .ARM.attributes
+                0x0000000000000030       0x30 tassimo.o

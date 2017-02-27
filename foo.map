@@ -1,0 +1,57 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x0000000040000800 0x0000000000000800 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000040000800                . = 0x40000800
+
+.text           0x0000000040000800      0x230
+ *(.text)
+ .text          0x0000000040000800      0x230 dumper.o
+                0x0000000040000800                putuart
+                0x0000000040000850                ledoff
+                0x0000000040000878                ledon
+                0x00000000400008a0                main
+
+.glue_7         0x0000000040000a30        0x0
+ .glue_7        0x0000000040000a30        0x0 linker stubs
+
+.glue_7t        0x0000000040000a30        0x0
+ .glue_7t       0x0000000040000a30        0x0 linker stubs
+
+.vfp11_veneer   0x0000000040000a30        0x0
+ .vfp11_veneer  0x0000000040000a30        0x0 linker stubs
+
+.v4_bx          0x0000000040000a30        0x0
+ .v4_bx         0x0000000040000a30        0x0 linker stubs
+
+.iplt           0x0000000040000a30        0x0
+ .iplt          0x0000000040000a30        0x0 dumper.o
+
+.rel.dyn        0x0000000040000a30        0x0
+ .rel.iplt      0x0000000040000a30        0x0 dumper.o
+
+.data           0x0000000040000a30        0x0
+ *(.data)
+ .data          0x0000000040000a30        0x0 dumper.o
+LOAD dumper.o
+OUTPUT(dumper.out elf32-littlearm)
+
+.igot.plt       0x0000000040000a30        0x0
+ .igot.plt      0x0000000040000a30        0x0 dumper.o
+
+.bss            0x0000000040000a30        0x0
+ .bss           0x0000000040000a30        0x0 dumper.o
+
+.comment        0x0000000000000000       0x1d
+ .comment       0x0000000000000000       0x1d dumper.o
+                                         0x1e (size before relaxing)
+
+.ARM.attributes
+                0x0000000000000000       0x30
+ .ARM.attributes
+                0x0000000000000000       0x30 dumper.o
